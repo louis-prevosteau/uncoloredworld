@@ -1,0 +1,48 @@
+<div fxFlexFill fxLayoutAlign="center center" *ngIf="loading">
+  <mat-card>
+    <mat-card-content>
+      <mat-progress-spinner
+        class="example-margin"
+        [color]="'primary'"
+        mode="indeterminate"
+        diameter="100">
+      </mat-progress-spinner>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="personne">
+  <mat-card fxFlex="80">
+    <mat-card-header>
+      <mat-card-title>
+        Name : {{personne.prenom}} {{personne.nom}}
+      </mat-card-title>
+      <mat-card-subtitle>Pseudo : {{personne.pseudo}}</mat-card-subtitle>
+      <mat-card-subtitle>Score actuel : {{personne.statistique.score}}</mat-card-subtitle>
+      <mat-card-subtitle>Meilleur Score : {{personne.statistique.high_score}}</mat-card-subtitle>
+      <mat-card-subtitle>Nombre de tirs : {{personne.statistique.tirs}}</mat-card-subtitle>
+      <mat-card-subtitle>Nombre d'ennemis tués : {{personne.statistique.ennemis_tues}}</mat-card-subtitle>
+      <mat-card-subtitle>Nombre de morts : {{personne.statistique.morts}}</mat-card-subtitle>
+      <mat-card-subtitle>Nombre de bonus ramassés : {{personne.statistique.bonus}}</mat-card-subtitle>
+      <mat-card-subtitle>Nombre de malus ramassés : {{personne.statistique.malus}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div fxLayoutAlign="center center">
+        <img mat-card-image [src]="personne.avatar" class="img-avatar">
+      </div>
+    </mat-card-content>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center space-around">
+      <div *ngIf="currentUser.id == personne.id || currentUser.user.role.includes('admin')">
+        <button mat-raised-button (click)="editPersonne()">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-raised-button (click)="deletePersonne()">
+          <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+<!--      <button mat-raised-button>
+        <mat-icon>delete</mat-icon>
+      </button>-->
+    </mat-card-actions>
+  </mat-card>
+</div>
